@@ -1,3 +1,5 @@
+import financial_metrics
+
 # Objects, references and copying
 
 daily_orders = [124, 156, 143, 189, 201]
@@ -206,25 +208,25 @@ print("The profit of the order ist ",profit)
 # one function using multiple fields from a dictionary plus business logic.
 order_dictionary["delivered"] = True
 
-def calculate_realized_profit(order):
-    if order["delivered"]:
-        profit = order["revenue"] - order["cost"]
-    else:
-        profit = 0
-    return profit
+# def calculate_realized_profit(order):
+#     if order["delivered"]:
+#         profit = order["revenue"] - order["cost"]
+#     else:
+#         profit = 0
+#     return profit
 
-print("The Realized Profit of the order is ", calculate_realized_profit(order_dictionary))
+# print("The Realized Profit of the order is ", calculate_realized_profit(order_dictionary))
 
 # Early Returns
 print("Early returns")
 
-def calculate_realized_profit(order):
-    if order["delivered"]:
-        return order["revenue"] - order["cost"]
-    else:
-        return 0
+# def calculate_realized_profit(order):
+#     if order["delivered"]:
+#         return order["revenue"] - order["cost"]
+#     else:
+#         return 0
 
-print("The Realized Profit of the order is ", calculate_realized_profit(order_dictionary))
+# print("The Realized Profit of the order is ", calculate_realized_profit(order_dictionary))
 
 # Next: applying our function to multiple orders
 # Now we’re ready to combine the two ideas Ive learned:
@@ -240,31 +242,145 @@ orders = [
 ]
 
 
-for order in orders:
-    print(order["order_id"], calculate_realized_profit(order))
+# for order in orders:
+#     print(order["order_id"], calculate_realized_profit(order))
 
 # What is the total realized profit across all orders?
 
 total_realized_profit = 0 
 
-for order in orders:
-    total_realized_profit += calculate_realized_profit(order)
+# for order in orders:
+#     total_realized_profit += calculate_realized_profit(order)
 
 print(total_realized_profit)
 
-print("Returning multiple values")
+# print("Returning multiple values")
+# def calculate_financial_metrics(orders):
+#     total_revenue = 0
+#     total_realized_profit = 0
+#     for order in orders:
+#         total_revenue += order["revenue"]
+#         total_realized_profit += calculate_realized_profit(order)
+#     return total_revenue, total_realized_profit
+    
+
+# print(calculate_financial_metrics(orders))
+
+# revenue = calculate_financial_metrics(orders)[0]
+# print("Revenue is ", revenue)
+# profit = calculate_financial_metrics(orders)[1]
+# print("Profit is ", profit)
+
+print()
+
+orders = [
+    {"order_id": "O-101", "revenue": 120, "cost": 80, "delivered": True},
+    {"order_id": "O-102", "revenue": 75, "cost": 50, "delivered": False},
+    {"order_id": "O-103", "revenue": 210, "cost": 130, "delivered": True},
+    {"order_id": "O-104", "revenue": 95, "cost": 60, "delivered": True},
+]
+
+def calculate_realized_profit(order):
+    if order["delivered"]:
+        return order["revenue"] - order["cost"]
+    else:
+        return 0
+
+# Next concept: functions returning dictionaries
+print()
 def calculate_financial_metrics(orders):
     total_revenue = 0
     total_realized_profit = 0
+
     for order in orders:
         total_revenue += order["revenue"]
         total_realized_profit += calculate_realized_profit(order)
-    return total_revenue, total_realized_profit
-    
+    return {
+        "revenue": total_revenue,
+        "realized_profit": total_realized_profit
+    }
+metrics = calculate_financial_metrics(orders)
+print(metrics["realized_profit"])
 
-print(calculate_financial_metrics(orders))
+# LIST COMPREHENSION
 
-revenue = calculate_financial_metrics(orders)[0]
-print("Revenue is ", revenue)
-profit = calculate_financial_metrics(orders)[1]
-print("Profit is ", profit)
+order_ids = [order["order_id"] for order in orders]
+
+delivered_order_ids = [
+    order["order_id"]
+    for order in orders
+    if order["delivered"]
+]
+
+print(delivered_order_ids)
+print()
+delivered_profits = [
+    calculate_realized_profit(order)
+    for order in orders
+    if order["delivered"]
+]
+print(delivered_profits)
+
+print()
+
+high_revenue_orders = [
+    order["order_id"]
+    for order in orders
+    if order["revenue"] >= 100
+]
+print(high_revenue_orders)
+
+# DICTIONARY COMPREHENSION
+print()
+revenue_by_order = {
+    order["order_id"]: order["revenue"]
+    for order in orders
+}
+print(revenue_by_order)
+print()
+delivered_profit_by_order = {
+    order["order_id"]: calculate_realized_profit(order)
+    for order in orders
+    if order["delivered"]
+}
+print(delivered_profit_by_order)
+
+# TUPLES
+
+# List → mutable
+#coordinates = [52.52, 13.40]
+#coordinates[0] = 48.20      # ✅
+
+# Tuple → immutable
+#coordinates = (52.52, 13.40)
+#coordinates[0] = 48.20      # ❌
+
+# SETS
+print()
+delivery_status = {
+    order["delivered"]
+    for order in orders
+}
+print(delivery_status)
+
+print()
+
+# filtering vs conditional transformation.
+revenue_categories = [
+    "High" if order["revenue"] >= 100 else "Standard"
+    for order in orders
+]
+print(revenue_categories)
+
+print("mapping each order ID to High or Standard:")
+
+revenue_category_by_order = {
+    order["order_id"]: "High" if order["revenue"] >= 100 else "Standard"
+    for order in orders
+}
+print(revenue_category_by_order)
+
+print("module import")
+
+for order in orders:
+    print(order["order_id"], financial_metrics.calculate_realized_profit(order))
