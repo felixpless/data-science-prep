@@ -14,20 +14,35 @@ bad_order = {
     "delivered": True
 }
 
+wrong_type_order = {
+    "order_id": "O-106",
+    "revenue": 150,
+    "cost": "80 EUR",
+    "delivered": True
+}
+
+test_orders = [
+    {"order_id": "O-101", "revenue": 120, "cost": 80, "delivered": True},
+    {"order_id": "O-105", "revenue": 150, "delivered": True},
+    {"order_id": "O-106", "revenue": 150, "cost": "80 EUR", "delivered": True},
+]
+
 def main():
-    current_profit = {
-        order["order_id"]: financial_metrics.calculate_realized_profit(order)
-        for order in orders
-    }
 
-    print(current_profit)
+    for order in test_orders:
+        try:
+            profit = financial_metrics.calculate_realized_profit(order)
 
-    try:
-        print(financial_metrics.calculate_realized_profit(bad_order))
-    except KeyError as error:
-        print(f"Order {bad_order["order_id"]} is missing key: {error}")
+        except KeyError as error:
+            print(f"Missing key: {error}")
 
+        except TypeError as error:
+            print(f"Invalid data type: {error}")
+
+        else:
+            print(f"Successfully processed {order['order_id']}: profit = {profit}")
 
 if __name__ == "__main__":
     main()
+
 

@@ -1,0 +1,3 @@
+order_id,revenue,cost
+O-101,120,80
+O-102,75,50

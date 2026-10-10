@@ -1,0 +1,7 @@
+order_id,revenue,cost,delivered
+O-101,120,80,True
+O-102,75,50,False
+O-103,200,130,True
+O-104,150,90,True
+O-105,-50,20,True
+O-106,180,abc,True
