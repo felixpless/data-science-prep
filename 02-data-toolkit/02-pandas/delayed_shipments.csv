@@ -1,0 +1,4 @@
+Shipment_ID,City,Customer,Revenue,Delivery_Days,Status,Operating_Costs,Profit,Profit_Margin,Shipment_Date,Weekday
+1003,Munich,Amazon,1500,3,Delayed,450.0,1050.0,70.0,2026-10-03,Saturday
+1005,Hamburg,Amazon,2100,5,Delayed,630.0,1470.0,70.0,2026-10-05,Monday
+1008,Hamburg,Zalando,1750,6,Delayed,525.0,1225.0,70.0,2026-10-08,Thursday

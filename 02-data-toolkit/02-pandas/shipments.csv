@@ -1,0 +1,9 @@
+Shipment_ID,City,Customer,Revenue,Delivery_Days,Status
+1001,Berlin,Amazon,1200,2,Delivered
+1002,Hamburg,Zalando,850,4,Delivered
+1003,Munich,Amazon,1500,3,Delayed
+1004,Berlin,Otto,650,1,Delivered
+1005,Hamburg,Amazon,2100,5,Delayed
+1006,Munich,Zalando,950,2,Delivered
+1007,Berlin,Otto,1100,3,Delivered
+1008,Hamburg,Zalando,1750,6,Delayed
