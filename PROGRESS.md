@@ -2,7 +2,7 @@
 
 - [x] 02.01 NumPy
 - [x] 02.02 Pandas Fundamentals
-- [ ] 02.03 Data Cleaning & Transformation
+- [x] 02.03 Data Cleaning & Transformation
 - [ ] 02.04 Data Aggregation & Business KPIs
 - [ ] 02.05 Combining Multiple Datasets
 - [ ] 02.06 Data Visualization & Storytelling
